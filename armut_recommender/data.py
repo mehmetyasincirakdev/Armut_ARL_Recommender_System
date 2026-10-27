@@ -14,12 +14,17 @@ def prepare_data(data: pd.DataFrame) -> pd.DataFrame:
     if missing_columns:
         raise ValueError(f"Dataset is missing required columns: {', '.join(missing_columns)}")
 
-    prepared = data.loc[:, list(REQUIRED_COLUMNS)].copy()
+    prepared = pd.DataFrame(data, columns=REQUIRED_COLUMNS).copy()
     if prepared.empty:
         raise ValueError("Dataset contains no service events.")
 
     parsed_dates = pd.to_datetime(prepared["CreateDate"], errors="coerce")
-    invalid_rows = prepared.isna().any(axis=1) | parsed_dates.isna()
+    invalid_rows = (
+        prepared["UserId"].isna()
+        | prepared["ServiceId"].isna()
+        | prepared["CategoryId"].isna()
+        | parsed_dates.isna()
+    )
     invalid_row_count = int(invalid_rows.sum())
     if invalid_row_count:
         raise ValueError(
