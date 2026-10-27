@@ -1,0 +1,28 @@
+# Local and potentially sensitive datasets
+/Datasets/
+*.csv
+*.parquet
+*.xlsx
+*.xls
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# IDE and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
