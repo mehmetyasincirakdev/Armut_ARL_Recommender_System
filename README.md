@@ -46,6 +46,10 @@ py -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
+VS Code is configured to use `.venv` by default. If it still analyzes the
+project with another interpreter, run **Python: Select Interpreter**, choose
+the project's `.venv`, and reload the window.
+
 ## Run
 
 ```powershell
